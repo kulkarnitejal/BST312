@@ -46,14 +46,16 @@ int main2() {
     print(bst.inOrderTraversal());
     cout << endl;
 
+
     cout << "Remove items " << endl;
     cout << "number of nodes in tree before delete is " << bst.countNodes() << endl;
-    s = "bst";
+    s = "Tejal";
     bst.deleteItem(s);
     print(bst.postOrderTraversal());
     cout << endl;
     cout << "number of nodes in tree after delete is " << bst.countNodes() << endl;
     cout << endl;
+    return 0;
 
 }
 
@@ -63,7 +65,7 @@ int main() {
     cout<<"empty bst size" << bst.countNodes() <<endl;
 
     bst.insertItem(2);
-    bst.insertItem(5);
+    bst.insertItem(12);
     bst.insertItem(8);
     bst.insertItem(6);
     bst.insertItem(7);
@@ -74,16 +76,30 @@ int main() {
     cout << "size w add of same node: " <<bst.countNodes()<< endl;
 
     cout << "preorder traversal is " << endl;
+    print(bst.preOrderTraversal());
+    cout << endl;
+
+    cout << "inorder traversal is " << endl;
+    print(bst.inOrderTraversal());
+    cout << endl;
+
+    cout << "postorder traversal is " << endl;
     print(bst.postOrderTraversal());
     cout << endl;
 
     cout << "Remove items " << endl;
     cout << "number of nodes in tree before delete is " << bst.countNodes() << endl;
-    bst.deleteItem(5);
+    bst.deleteItem(12);
     print(bst.postOrderTraversal());
     cout << endl;
     cout << "number of nodes in tree after delete is " << bst.countNodes() << endl;
     cout << endl;
+
+    cout << bst.isItemInTree(7) << endl;
+    cout << bst.isItemInTree(12) << endl;
+
+
+    return 0;
 }
 
 

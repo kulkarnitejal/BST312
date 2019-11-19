@@ -254,7 +254,7 @@ void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
     if(t->right != NULL){
         makeEmpty(t->right);
     }
-    delete(t);
+    delete(t);                                          //delete nodes on left side then right
     //YOUR CODE GOES HERE
 }
 
@@ -268,7 +268,7 @@ void BST_312 <ItemType>::makeEmpty()
 template<class ItemType>
 bool BST_312 <ItemType>::isEmpty() const
 {
-    return root == NULL;
+    return root == NULL;                                //return true if empty
 }
 
 
@@ -294,21 +294,22 @@ template<class ItemType>
 void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {
     if(t == NULL){
-        t = new TreeNode;
+        t = new TreeNode;                               //new node inserted
         t->left = NULL;
         t->right = NULL;
         t->data = newItem;
     }
 
-   else if(newItem < t->data){
+   else if(newItem < t->data){                          //check if item should be inserted on left branch
         insertItem(t->left, newItem);
     }
-    else if (newItem > t->data){
+    else if (newItem > t->data){                        //check right branch
         insertItem(t->right, newItem);
     }
-    else if(newItem == t->data){                //already has that number
+    else if(newItem == t->data){                         //dont add if already has that number
         return;
     }
+    //delete(t);
     //YOUR CODE GOES HERE
 
 }
@@ -328,7 +329,7 @@ int BST_312 <ItemType>::countNodes(TreeNode* t) const
     int nodes = 0;
     if(t != NULL){
         nodes++;
-        nodes += countNodes(t->left);
+        nodes += countNodes(t->left);                          //recursively called to count nodes on left/right side
         nodes += countNodes(t->right);
     }
 
@@ -345,6 +346,7 @@ int BST_312 <ItemType>::countNodes()
     //YOUR CODE GOES HERE
 }
 
+//preorder: data, left, right
 template<class ItemType>
 void BST_312 <ItemType>::preOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
@@ -367,6 +369,7 @@ vector<ItemType> BST_312 <ItemType>::preOrderTraversal()
 
 }
 
+//inorder: left, data, right
 template<class ItemType>
 void BST_312 <ItemType>::inOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
@@ -384,11 +387,12 @@ template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::inOrderTraversal()
 {
     vector<ItemType> nodes;
-    preOrderTraversal(root, nodes);
+    inOrderTraversal(root, nodes);
     return nodes;
     //YOUR CODE GOES HERE
 }
 
+//postorder: left, right, data
 template<class ItemType>
 void BST_312 <ItemType>::postOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
@@ -405,7 +409,7 @@ template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
 {
     vector<ItemType> nodes;
-    preOrderTraversal(root, nodes);
+    postOrderTraversal(root, nodes);
     return nodes;
     //YOUR CODE GOES HERE
 }
@@ -413,7 +417,7 @@ vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
 template<class ItemType>
 bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
 {
-    TreeNode newNode = root;
+    TreeNode *newNode = root;
     while(newNode != NULL) {
         if (item == newNode->data) {
             return true;
@@ -425,6 +429,7 @@ bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
             newNode = newNode->right;
         }
     }
+    delete(newNode);
     return false;
     //YOUR CODE GOES HERE
 }
